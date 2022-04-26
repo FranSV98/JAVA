@@ -18,6 +18,8 @@ public class Cuenta{
     this.cantidad = cuenta.cantidad;
   }
 
+  //GET Y SET
+
   public String getTitular(){
     return this.titular;
   }
@@ -38,19 +40,17 @@ public class Cuenta{
   public String toString(){
     return "El nombre del titular es" + this.titular + " y la cantidad es " + this.cantidad + " .";
 
-      public double ingresar(double importe){
-              if (importe >0){
-                  this.cantidad +=importe;
-              }
-              return this.cantidad;
-          }
+  public double ingresar(double importe){
+    if (importe >0){
+      this.cantidad +=importe;
+    }
+      return this.cantidad;
+  }
 
-          public double retirar(double importe){
-              if (importe >0 && importe <=this.cantidad){
-                  this.cantidad -=importe;
-              }
-              return this.cantidad;
-          }
-
+  public double retirar(double importe){
+    if (importe >0 && importe <=this.cantidad){
+      this.cantidad -=importe;
+    }
+      return this.cantidad;
   }
 }
