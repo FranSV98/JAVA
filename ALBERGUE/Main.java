@@ -24,68 +24,40 @@ public class Main {
     String tipoHabitacion;
     Albergue habitacion = Albergue.SIMPLE;
     int numPersonas = 0, numNoches;
-    double precioTotal, precioPorPersona,recaudacion=0;
+    double precioTotal, precioPorPersona;
     boolean numPersonasValido = false;
-    int numeroHabitaciones = Albergue.SIMPLE.getDisponibles()+Albergue.DOBLE.getDisponibles()+Albergue.TRIPLE.getDisponibles()+Albergue.MULTIPLE.getDisponibles();
-    String masReservas="SI";
 
-  while(numeroHabitaciones>0 && masReservas.equals("SI")){
-    System.out.println("Numero de habitaciones disponibles--> "+numeroHabitaciones);
-   numPersonasValido = false;
-    while(!numPersonasValido){
+    do{
       try{
-      System.out.print("Indica el tipo de habitacion que desea: ");
-      tipoHabitacion = sc.nextLine();
-      habitacion = Albergue.valueOf(tipoHabitacion);
-      }
-      catch(Exception e){
-        System.out.println("Tipo de habitacion invalido, las que hay son SIMPLE/DOBLE/TRIPLE/MULTIPLE");
+        System.out.println();
+        System.out.print("Indica el tipo de habitacion que desea: ");
         tipoHabitacion = sc.nextLine();
         habitacion = Albergue.valueOf(tipoHabitacion);
+        System.out.print("Indica el numero de personas: ");
+        numPersonas = Integer.parseInt(sc.nextLine());
+        //System.out.println(" -- Comprobar que el numero de personas es valido -- ");
+        numPersonasValido = habitacion.numPersonasValido(numPersonas);
+      } catch (NumberFormatException num){
+        System.out.println("Debe introducir un numero valido...");
+      } catch (IllegalArgumentException arg){
+        System.out.println("Debe introducir un tipo de habitacion valido: SIMPLE, DOBLE, TRIPLE o MULTIPLE...");
       }
-      try{
-      System.out.print("Indica el numero de personas: ");
-      numPersonas = sc.nextInt();
-      sc.nextLine(); // Limpiamos el buffer.
-      //System.out.println(" -- Comprobar que el numero de personas es valido -- ");
-
-      numPersonasValido = habitacion.numPersonasValido(numPersonas);}
-      catch(Exception e){
-        sc.nextLine();
-        System.out.println("Numero de personas invalido quiero personas enteras gracias ");
-        numPersonas = sc.nextInt();
-        sc.nextLine();
-        numPersonasValido = habitacion.numPersonasValido(numPersonas);}
-      }
-
-    numeroHabitaciones--;
-
-    try{
+      //finally {
+      //  System.out.println("Pues aqui estamos...");
+      //}
+    }while(!numPersonasValido);
     System.out.print("Indica el numero de noches: ");
     numNoches = sc.nextInt();
-    sc.nextLine(); // Limpiamos el buffer
     //System.out.println(" -- Cuanto vale la habitacion en total -- ");
     precioTotal = habitacion.precioTotal(numNoches);
-    recaudacion+=precioTotal;}
-    catch(Exception e){
-    sc.nextLine();
-    System.out.print("Indica el numero de noches enteras: ");
-    numNoches = sc.nextInt();
-    sc.nextLine(); // Limpiamos el buffer
-    //System.out.println(" -- Cuanto vale la habitacion en total -- ");
-    precioTotal = habitacion.precioTotal(numNoches);
-    recaudacion+=precioTotal;}
     System.out.println("El precio total es de " + precioTotal + " euros.");
     //System.out.println(" -- Cuanto vale la habitacion en total por persona -- ");
     precioPorPersona = habitacion.precioPorPersona(numPersonas,precioTotal);
     System.out.println("El precio por persona es de " + precioPorPersona + " euros.");
-    System.out.println("Recaudacion total por el momento en lo que va de reservas -->"+ recaudacion+" euros.");
-    System.out.print("Quedan mas reservas por hacer SI/NO ");
-    masReservas=sc.nextLine();
-    /*if (habitacion.getDisponibles() == 0){
+
+    if (habitacion.getDisponibles() == 0){
       System.out.println("Hemos cometido un error, toma descuento (estas son las opciones): ");
       solucionAlternativa(numPersonas);
-    }*/
-  }
+    }
   }
 }

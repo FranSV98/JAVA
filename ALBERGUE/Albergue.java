@@ -36,7 +36,7 @@ public enum Albergue{
   }
 
   public boolean numPersonasValido(int numPersonas){
-    return numPersonas <= this.personas;
+    return numPersonas <= this.personas && numPersonas > 0;
   }
   public double precioTotal(int numNoches){
     return numNoches*this.precio;
