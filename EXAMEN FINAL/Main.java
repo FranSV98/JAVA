@@ -26,12 +26,12 @@ public class Main {
          boolean preguntas = false;
 
          while(!preguntas){
-           System.out.println("1. Crear Tarjeta");
+           System.out.println("\n1. Crear Tarjeta");
            System.out.println("2. Mostrar tarjetas");
            System.out.println("3. Mostrar tarjeta que vale mas de 1 punto");
            System.out.println("4. Mostrar pregunta aleatoria.");
            System.out.println("5. Examen.");
-           System.out.println("6. Volver a menu inicial.");
+           System.out.println("6. Volver a menu inicial.\n");
 
            System.out.println("Que opcion vas a escoger");
            opciones = recu.nextInt();
@@ -42,10 +42,10 @@ public class Main {
                             double punt;
 
                             System.out.println("\nIntroduce la pregunta: ");
-                            preg = sc.nextLine();
+                            preg = sc.next();
 
                             System.out.println("Introduce la respuesta: ");
-                            resp = sc.nextLine();
+                            resp = sc.next();
 
                             System.out.println("Introduce los puntos: ");
                             punt = sc.nextDouble();
@@ -84,6 +84,8 @@ public class Main {
 
                         } else if (opciones == 5) {
                             System.out.println("ESTO EN UN EXAMEN SORPRESA");
+                        } else if (opciones == 6) {
+                            System.out.println("Volvemos al menu");
                         }
                     }
                 } else if (opcion == 2) {
